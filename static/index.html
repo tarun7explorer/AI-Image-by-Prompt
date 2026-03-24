@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Image Generation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Ambient background grid -->
+  <div class="bg-grid" aria-hidden="true"></div>
+  <!-- Ambient orbs -->
+  <div class="orb orb-1" aria-hidden="true"></div>
+  <div class="orb orb-2" aria-hidden="true"></div>
+
+  <main class="wrapper">
+
+    <!-- ── Header ─────────────────────────────────────────────── -->
+    <header class="site-header">
+      <h1 class="site-title">AI Image by Prompt</h1>
+      <p class="site-sub">Transform a rough idea into a precision-crafted image.</p>
+    </header>
+
+    <!-- ── Step 1 — Input ──────────────────────────────────────── -->
+    <section class="card" id="section-input">
+      <div class="card-label">YOUR IDEA</div>
+      <textarea
+        id="user-prompt"
+        class="prompt-input"
+        placeholder="Describe anything… a scene, a mood, a character, a world."
+        rows="4"
+        spellcheck="false"
+        maxlength="500"
+      ></textarea>
+      <div class="char-count"><span id="char-count">0</span> / 500</div>
+
+      <div class="btn-row">
+        <button class="btn btn-ghost" id="btn-clear">
+          <span class="btn-icon">↺</span> Clear
+        </button>
+        <button class="btn btn-primary" id="btn-enter">
+          <span class="btn-icon">⟶</span> Refine Prompt
+        </button>
+      </div>
+    </section>
+
+    <!-- ── Step 2 — Refined Prompt ─────────────────────────────── -->
+    <section class="card card-reveal" id="section-refined" aria-live="polite">
+      <div class="card-label">REFINED PROMPT</div>
+
+      <div class="compare-grid">
+        <div class="compare-col">
+          <div class="compare-tag">Original</div>
+          <p class="compare-text muted" id="original-echo"></p>
+        </div>
+        <div class="compare-divider" aria-hidden="true">→</div>
+        <div class="compare-col">
+          <div class="compare-tag accent-tag">Refined</div>
+          <p class="compare-text" id="refined-prompt-text"></p>
+        </div>
+      </div>
+
+      <div class="explanation-box">
+        <span class="explanation-icon" aria-hidden="true">💡</span>
+        <p id="explanation-text" class="explanation-copy"></p>
+      </div>
+
+      <div class="btn-row btn-row--end">
+        <button class="btn btn-cta" id="btn-continue">
+          <span class="btn-icon">✦</span> Generate AI Image
+        </button>
+      </div>
+    </section>
+
+    <!-- ── Step 3 — Loading ────────────────────────────────────── -->
+    <section class="card card-reveal" id="section-loading" aria-live="polite" aria-busy="true">
+      <div class="spinner-wrap">
+        <div class="spinner" aria-hidden="true">
+          <div class="spinner-ring"></div>
+          <div class="spinner-ring spinner-ring--2"></div>
+          <div class="spinner-ring spinner-ring--3"></div>
+        </div>
+        <p class="loading-label" id="loading-label">Generating your image…</p>
+        <p class="loading-sub">This can take 10-30 seconds on the free tier.</p>
+      </div>
+    </section>
+
+    <!-- ── Step 4 — Result ─────────────────────────────────────── -->
+    <section class="card card-reveal" id="section-result" aria-live="polite">
+      <div class="card-label">GENERATED IMAGE</div>
+
+      <div class="image-frame">
+        <img id="result-image" src="" alt="AI-generated result" />
+        <div class="image-overlay" aria-hidden="true"></div>
+      </div>
+
+      <div class="result-prompt-echo">
+        <span class="result-prompt-label">Prompt used:</span>
+        <span class="result-prompt-text dm-mono" id="result-prompt-echo"></span>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn btn-ghost" id="btn-restart">
+          <span class="btn-icon">↺</span> Start Over
+        </button>
+        <a class="btn btn-primary" id="btn-download" download="refined-image.jpg">
+          <span class="btn-icon">↓</span> Download JPG
+        </a>
+      </div>
+    </section>
+
+    <!-- ── Error toast ─────────────────────────────────────────── -->
+    <div class="toast" id="error-toast" role="alert" aria-atomic="true">
+      <span class="toast-icon" aria-hidden="true">⚠</span>
+      <span id="error-message">Something went wrong.</span>
+    </div>
+
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
