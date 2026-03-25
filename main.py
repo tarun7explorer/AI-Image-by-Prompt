@@ -14,10 +14,8 @@ from llm_refiner import refine_prompt
 from schemas import RefineRequest, GenerateRequest
 
 load_dotenv()
-
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
-
 app = FastAPI(title="AI Prompt Refiner Image Generator")
 
 app.add_middleware(
@@ -40,9 +38,7 @@ async def api_refine(body: RefineRequest):
 async def api_generate(body: GenerateRequest):
     try:
         image_bytes = generate_image(body.refined_prompt)
-
         pil_image = Image.open(io.BytesIO(image_bytes)).convert("RGB")
-
         image_b64 = base64.b64encode(image_bytes).decode("utf-8")
 
         return {
@@ -55,10 +51,8 @@ async def api_generate(body: GenerateRequest):
                 "Included high-resolution quality boosters"
             ]
         }
-
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
-
 
 STATIC_DIR = os.path.join(os.path.dirname(__file__), "static")
 app.mount("/", StaticFiles(directory=STATIC_DIR, html=True), name="static")
