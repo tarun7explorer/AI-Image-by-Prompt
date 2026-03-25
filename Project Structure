@@ -6,7 +6,7 @@ AI-prompt-image-generation
 ├── schemas.py
 ├── requirements.txt
 ├── README.md
-├── .env  
+├── .env & .gitignore
 │
 ├── static/
 │   ├── index.html
