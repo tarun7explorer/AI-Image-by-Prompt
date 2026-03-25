@@ -1,4 +1,4 @@
-AI-prompt-image-generation/
+AI-prompt-image-generation
 │
 ├── main.py
 ├── llm_refiner.py
@@ -6,7 +6,7 @@ AI-prompt-image-generation/
 ├── schemas.py
 ├── requirements.txt
 ├── README.md
-├── .env   
+├── .env  
 │
 ├── static/
 │   ├── index.html
